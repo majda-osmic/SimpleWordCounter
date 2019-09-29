@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>SimpleWordCounter</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Updated.FileParser\Updated.FileParser.csproj" />
+    <ProjectReference Include="..\Updated.Utilities\Updated.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\FileLoadingProgressView.xaml.cs">
+      <DependentUpon>FileLoadingProgressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\LoadedContentView.xaml.cs">
+      <DependentUpon>LoadedContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\StatusBarView.xaml.cs">
+      <DependentUpon>StatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\ToolBarView.xaml.cs">
+      <DependentUpon>ToolBarView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\FileLoadingProgressView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LoadedContentView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\StatusBarView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ToolBarView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
