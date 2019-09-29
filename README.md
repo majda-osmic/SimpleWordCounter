@@ -1,0 +1,2 @@
+# SimpleWordCounter
+Sample WPF Project
