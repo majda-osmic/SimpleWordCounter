@@ -9,7 +9,7 @@ namespace FileParser
 {
     public class Parser
     {
-       private static char[] _wordSplitters = new char[2] { ' ', '\t' };
+        private static char[] _wordSplitters = new char[2] { ' ', '\t' };
 
         private System.Timers.Timer _timer;
         private long _bytesRead = 0;
@@ -58,21 +58,22 @@ namespace FileParser
                 _timer?.Start();
                 using (var reader = new StreamReader(filePath, Encoding))
                 {
-                    var line = reader.ReadLine();
-                    _bytesRead = Encoding.GetByteCount(line);
+                    _bytesRead = 0;
+                    var line = String.Empty;
 
                     try
                     {
-                        while (!string.IsNullOrEmpty(line))
+                        do
                         {
+                            line = reader.ReadLine();
                             MapUniqueWords(line, result);
                             _bytesRead += Encoding.GetByteCount(line);
                             if (cancelationToken.IsCancellationRequested)
                             {
                                 return null;
                             }
-                            line = reader.ReadLine();
-                        }
+
+                        } while (!reader.EndOfStream);
 
                         return result;
                     }
