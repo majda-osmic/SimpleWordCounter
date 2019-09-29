@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWordCounter", "SimpleWordCounter\SimpleWordCounter.csproj", "{3753DF82-C478-4E3C-904C-BE5EDF80D308}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{1D6CFEF2-1EEB-4AC1-893C-E3678FCE90EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileParser", "FileParser\FileParser.csproj", "{3625A804-A01D-4827-810F-BB37BD1A5E0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Original", "Original", "{00B919F4-CC46-41C8-9DE6-A1A77312A2AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Updated", "Updated", "{E1AA265E-8CA3-4646-B152-0A8C094C189C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +34,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3753DF82-C478-4E3C-904C-BE5EDF80D308} = {00B919F4-CC46-41C8-9DE6-A1A77312A2AB}
+		{1D6CFEF2-1EEB-4AC1-893C-E3678FCE90EE} = {00B919F4-CC46-41C8-9DE6-A1A77312A2AB}
+		{3625A804-A01D-4827-810F-BB37BD1A5E0A} = {00B919F4-CC46-41C8-9DE6-A1A77312A2AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DCC40B-028E-4375-BB17-376A0B45F32F}
