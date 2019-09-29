@@ -1,0 +1,26 @@
+﻿<Application x:Class="SimpleWordCounter.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:localView="clr-namespace:SimpleWordCounter.View"
+             xmlns:localViewModel="clr-namespace:SimpleWordCounter.ViewModel"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <DataTemplate DataType="{x:Type localViewModel:ToolBarViewModel}">
+            <localView:ToolBarView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type localViewModel:LoadedContentViewModel}">
+            <localView:LoadedContentView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type localViewModel:StatusBarViewModel}">
+            <localView:StatusBarView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type localViewModel:FileLoadingProgressViewModel}">
+            <localView:FileLoadingProgressView/>
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>
