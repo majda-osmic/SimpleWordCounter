@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using SimpleWordCounter.Model;
 using System;
 using System.IO;
 using Utilities;
@@ -20,20 +21,20 @@ namespace SimpleWordCounter.ViewModel
             }
         }
 
-        public string SavedInitialDirectory
+        public string SavedOrDefaultInitialDirectory
         {
             get
             {
-                //if (!string.IsNullOrEmpty(Path.Default.LastFilePath) && Directory.Exists(Path.Default.LastFilePath))
-                //    return Path.Default.LastFilePath;
+                var lastPath = PathConfiguration.Default.LastDir;
+                if (!string.IsNullOrEmpty(lastPath) && Directory.Exists(lastPath))
+                    return lastPath;
                 return Environment.SpecialFolder.Recent.ToString();
             }
             set
             {
                 if (!string.IsNullOrEmpty(value) && Directory.Exists(value))
                 {
-                    //Path.Default.LastFilePath = value;
-                    //Path.Default.Save();
+                    PathConfiguration.Default.LastDir = value;
                 }
             }
         }
@@ -51,13 +52,14 @@ namespace SimpleWordCounter.ViewModel
         {
             var openFileDialog = new OpenFileDialog()
             {
-                InitialDirectory = SavedInitialDirectory,
+                InitialDirectory = SavedOrDefaultInitialDirectory,
                 Filter = "txt files(*.txt) | *.txt"
             };
 
             if (openFileDialog.ShowDialog() ?? false)
             {
                 LoadFileRequested?.Invoke(openFileDialog.FileName);
+                SavedOrDefaultInitialDirectory = Path.GetDirectoryName(openFileDialog.FileName);
             }
         }
     }
