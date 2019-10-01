@@ -18,8 +18,8 @@ namespace SimpleWordCounter.Model
         [UserScopedSetting]
         public string LastDir
         {
-            get { return (string)this[nameof(LastDir)]; }
-            set { this[nameof(LastDir)] = value; }
+            get => (string)this[nameof(LastDir)];
+            set => this[nameof(LastDir)] = value;
         }
 
 

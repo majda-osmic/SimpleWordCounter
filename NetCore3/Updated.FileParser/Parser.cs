@@ -11,7 +11,7 @@ namespace FileParser
     {
         private static char[] _wordSplitters = new char[2] { ' ', '\t' };
 
-        private System.Timers.Timer? _timer;
+        private System.Timers.Timer _timer = new System.Timers.Timer();
         private long _bytesRead = 0;
 
         public double ProgressReportInveralMs { get; }

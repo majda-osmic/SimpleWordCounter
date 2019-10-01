@@ -13,11 +13,11 @@ namespace SimpleWordCounter.ViewModel
         private bool _loadingEnabled = true;
         public bool LoadingEnabled
         {
-            get { return _loadingEnabled; }
+            get => _loadingEnabled;
             set
             {
                 if (SetField(ref _loadingEnabled, value))
-                    OpenCommand?.RaiseCanExecuteChanged();
+                    OpenCommand.RaiseCanExecuteChanged();
             }
         }
 

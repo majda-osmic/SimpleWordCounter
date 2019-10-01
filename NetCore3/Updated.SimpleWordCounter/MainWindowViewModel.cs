@@ -24,7 +24,7 @@ namespace SimpleWordCounter
         public ToolBarViewModel ToolBar
         {
             get => _toolBar;
-            set { SetField(ref _toolBar, value); }
+            set => SetField(ref _toolBar, value);
         }
 
         private IContentViewModel _content = new NoContentViewModel(); //C#8

@@ -17,8 +17,8 @@ namespace SimpleWordCounter.ViewModel
         private int _current = 0;
         public int Current
         {
-            get { return _current; }
-            set { SetField(ref _current, value); }
+            get => _current;
+            set => SetField(ref _current, value);
         }
 
         public FileLoadingProgressViewModel(long fileSize, CancellationTokenSource cancellationSource)

@@ -10,8 +10,8 @@ namespace SimpleWordCounter.ViewModel
         private string _status = String.Empty;
         public string Status
         {
-            get { return _status; }
-            set { SetField(ref _status, value); }
+            get => _status;
+            set => SetField(ref _status, value);
         }
 
         public string TotalWordCount => File.WordCount.ToString(); //C#8
@@ -20,7 +20,7 @@ namespace SimpleWordCounter.ViewModel
         private IFile _file = new EmptyFile();
         public IFile File
         {
-            get { return _file; }
+            get => _file;
             set
             {
                 if (_file != null)
