@@ -13,6 +13,13 @@
             <localView:LoadedContentView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type localViewModel:NoContentViewModel}">
+            <Grid>
+                <!-- well, there is no content :) -->
+            </Grid>
+        </DataTemplate>
+
+
         <DataTemplate DataType="{x:Type localViewModel:StatusBarViewModel}">
             <localView:StatusBarView/>
         </DataTemplate>

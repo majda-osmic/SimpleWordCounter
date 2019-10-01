@@ -40,12 +40,9 @@ namespace SimpleWordCounter.ViewModel
         }
 
         public delegate void LoadFileHandler(string filePath);
-        public event LoadFileHandler LoadFileRequested;
+        public event LoadFileHandler? LoadFileRequested;
 
-        public ToolBarViewModel()
-        {
-            OpenCommand = new SimpleCommand(OpenFile, obj => LoadingEnabled);
-        }
+        public ToolBarViewModel() => OpenCommand = new SimpleCommand(OpenFile, obj => LoadingEnabled);
 
 
         private void OpenFile(object obj)
@@ -59,7 +56,7 @@ namespace SimpleWordCounter.ViewModel
             if (openFileDialog.ShowDialog() ?? false)
             {
                 LoadFileRequested?.Invoke(openFileDialog.FileName);
-                SavedOrDefaultInitialDirectory = Path.GetDirectoryName(openFileDialog.FileName);
+                SavedOrDefaultInitialDirectory = Path.GetDirectoryName(openFileDialog.FileName)!; //C# 8 damn it operator
             }
         }
     }

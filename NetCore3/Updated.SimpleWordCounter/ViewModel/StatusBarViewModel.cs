@@ -7,17 +7,17 @@ namespace SimpleWordCounter.ViewModel
 {
     public class StatusBarViewModel : NotificationObject
     {
-        private string _status;
+        private string _status = String.Empty;
         public string Status
         {
             get { return _status; }
             set { SetField(ref _status, value); }
         }
 
-        public string TotalWordCount => (File?.WordCount.HasValue ?? false) ? File.WordCount.ToString() : null;
-        public string UniqeWordCount => (File?.UniqueWordCount.HasValue ?? false) ? File.UniqueWordCount.ToString() : null;
+        public string TotalWordCount => File.WordCount.ToString(); //C#8
+        public string UniqeWordCount => File.UniqueWordCount.ToString(); //C#8
 
-        private IFile _file;
+        private IFile _file = new EmptyFile();
         public IFile File
         {
             get { return _file; }
@@ -32,10 +32,7 @@ namespace SimpleWordCounter.ViewModel
             }
         }
 
-        public StatusBarViewModel()
-        {
-            HandleCurrentFileStatus();
-        }
+        public StatusBarViewModel() => HandleCurrentFileStatus();
 
         private void OnFilePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -47,13 +44,7 @@ namespace SimpleWordCounter.ViewModel
             RaisePropertyChnaged(nameof(TotalWordCount));
             RaisePropertyChnaged(nameof(UniqeWordCount));
 
-            if (File == null)
-            {
-                Status = "Ready!";
-                return;
-            }
-
-            switch (File?.CurrentStatus)
+            switch (File.CurrentStatus) //C#8, no need to check for null :)
             {
                 case Model.Status.Loaded:
                 case Model.Status.Loading:
@@ -61,7 +52,7 @@ namespace SimpleWordCounter.ViewModel
                     break;
 
                 default:
-                    Status = string.Empty;
+                    Status = "Ready!";
                     break;
             }
         }

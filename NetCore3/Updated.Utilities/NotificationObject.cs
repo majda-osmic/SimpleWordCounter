@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -6,9 +7,9 @@ namespace Utilities
 {
     public class NotificationObject : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) //C#8 default null strings
         {
             if (EqualityComparer<T>.Default.Equals(field, value))
                 return false;
@@ -17,7 +18,7 @@ namespace Utilities
             return true;
         }
 
-        public void RaisePropertyChnaged(string propertyName)
+        public void RaisePropertyChnaged(string? propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

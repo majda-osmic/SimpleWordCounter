@@ -6,8 +6,8 @@ namespace SimpleWordCounter.Model
 {
     public class PathConfiguration : ApplicationSettingsBase
     {
-        static PathConfiguration _defaultInstance = (PathConfiguration)Synchronized(new PathConfiguration());
-        public static PathConfiguration Default { get => _defaultInstance; }
+        private static PathConfiguration _defaultInstance = (PathConfiguration)Synchronized(new PathConfiguration());
+        public static PathConfiguration Default => _defaultInstance;
 
         protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

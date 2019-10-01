@@ -20,9 +20,6 @@ namespace SimpleWordCounter.View
     /// </summary>
     public partial class StatusBarView : UserControl
     {
-        public StatusBarView()
-        {
-            InitializeComponent();
-        }
+        public StatusBarView() => InitializeComponent();
     }
 }

@@ -20,9 +20,6 @@ namespace SimpleWordCounter.View
     /// </summary>
     public partial class ToolBarView : UserControl
     {
-        public ToolBarView()
-        {
-            InitializeComponent();
-        }
+        public ToolBarView() => InitializeComponent();
     }
 }

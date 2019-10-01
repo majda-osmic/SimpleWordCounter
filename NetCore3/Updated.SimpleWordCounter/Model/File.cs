@@ -22,8 +22,8 @@ namespace SimpleWordCounter.Model
     public interface IFile : INotifyPropertyChanged
     {
         Status CurrentStatus { get; }
-        int? WordCount { get; }
-        int? UniqueWordCount { get; }
+        int WordCount { get; }
+        int UniqueWordCount { get; }
         string Path { get; }
     }
 
@@ -33,34 +33,35 @@ namespace SimpleWordCounter.Model
 
         public long Size { get; }
 
-        private int? _uniqueWordCount;
-        public int? UniqueWordCount
+        private int _uniqueWordCount;
+        public int UniqueWordCount
         {
-            get { return _uniqueWordCount; }
-            set { SetField(ref _uniqueWordCount, value); }
+            get => _uniqueWordCount;
+            set => SetField(ref _uniqueWordCount, value);
         }
 
-        private int? _wordCount;
-        public int? WordCount
+        private int _wordCount;
+        public int WordCount
         {
-            get { return _wordCount; }
-            set { SetField(ref _wordCount, value); }
+            get => _wordCount;
+            set => SetField(ref _wordCount, value);
         }
 
         private Status _currentStatus = Status.NotLoaded;
         public Status CurrentStatus
         {
-            get { return _currentStatus; }
-            set { SetField(ref _currentStatus, value); }
+            get => _currentStatus;
+            set => SetField(ref _currentStatus, value);
         }
 
-        private Dictionary<string, int> _loadedData;
+        private Dictionary<string, int> _loadedData = new Dictionary<string, int>();
         public Dictionary<string, int> LoadedData
         {
-            get { return _loadedData; }
-            set { SetField(ref _loadedData, value); }
+            get => _loadedData;
+            set => SetField(ref _loadedData, value);
         }
 
+      
         public File(string path)
         {
             Path = path;
@@ -71,9 +72,20 @@ namespace SimpleWordCounter.Model
         {
             CurrentStatus = Status.Loading;
             LoadedData = await (new Parser(progress)).ParseAsync(Path, token);
-            WordCount = _loadedData?.Values.Sum() ?? null;
-            UniqueWordCount = _loadedData?.Keys.Count ?? null;
+            WordCount = _loadedData.Values.Sum();
+            UniqueWordCount = _loadedData.Keys.Count;
             CurrentStatus = token.IsCancellationRequested ? Status.Canceled : Status.Loaded;
         }
+    }
+
+    public class EmptyFile : NotificationObject, IFile //C#8
+    {
+        public Status CurrentStatus => Status.NotLoaded;
+
+        public int WordCount => 0;
+
+        public int UniqueWordCount => 0;
+
+        public string Path => String.Empty;
     }
 }

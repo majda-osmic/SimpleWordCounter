@@ -20,11 +20,7 @@ namespace SimpleWordCounter.View
     /// </summary>
     public partial class FileLoadingProgressView : UserControl
     {
-        public FileLoadingProgressView()
-        {
-            InitializeComponent();
-        }
+        public FileLoadingProgressView() => InitializeComponent();
 
-       
     }
 }

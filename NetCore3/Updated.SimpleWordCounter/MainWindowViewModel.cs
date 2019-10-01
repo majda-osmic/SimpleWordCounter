@@ -16,28 +16,25 @@ namespace SimpleWordCounter
         private StatusBarViewModel _statusBar = new StatusBarViewModel();
         public StatusBarViewModel StatusBar
         {
-            get { return _statusBar; }
-            set { SetField(ref _statusBar, value); }
+            get => _statusBar;
+            set => SetField(ref _statusBar, value);
         }
 
         private ToolBarViewModel _toolBar = new ToolBarViewModel();
         public ToolBarViewModel ToolBar
         {
-            get { return _toolBar; }
+            get => _toolBar;
             set { SetField(ref _toolBar, value); }
         }
 
-        private IContentViewModel _content;
+        private IContentViewModel _content = new NoContentViewModel(); //C#8
         public IContentViewModel Content
         {
-            get { return _content; }
-            set { SetField(ref _content, value); }
+            get => _content;
+            set => SetField(ref _content, value);
         }
 
-        public MainWindowViewModel()
-        {
-            ToolBar.LoadFileRequested += OnLoadFile;
-        }
+        public MainWindowViewModel() => ToolBar.LoadFileRequested += OnLoadFile;
 
         private async void OnLoadFile(string filePath)
         {
@@ -59,10 +56,10 @@ namespace SimpleWordCounter
                 {
                     Content = new LoadedContentViewModel() { LoadedData = file.LoadedData };
                 }
-                else
+                else //C#8
                 {
-                    StatusBar.File = null; 
-                    Content = null;
+                    StatusBar.File = new EmptyFile(); 
+                    Content = new NoContentViewModel();
                 }
             }
             catch (Exception e)

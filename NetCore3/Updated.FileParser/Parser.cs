@@ -11,17 +11,12 @@ namespace FileParser
     {
         private static char[] _wordSplitters = new char[2] { ' ', '\t' };
 
-        private System.Timers.Timer _timer;
+        private System.Timers.Timer? _timer;
         private long _bytesRead = 0;
 
         public double ProgressReportInveralMs { get; }
         public Encoding Encoding { get; }
         public IProgress<long> Progres { get; }
-
-        public Parser() : this(null)
-        {
-
-        }
 
         public Parser(IProgress<long> progress, double progressReportIntervalMs = 50) : this(Encoding.UTF8, progress, progressReportIntervalMs)
         {
@@ -56,32 +51,29 @@ namespace FileParser
             {
                 var result = new Dictionary<string, int>();
                 _timer?.Start();
-                using (var reader = new StreamReader(filePath, Encoding))
+                using var reader = new StreamReader(filePath, Encoding); //C#8
+                _bytesRead = 0;
+                var line = String.Empty;
+                try
+                {
+                    do
+                    {
+                        line = reader.ReadLine();
+                        MapUniqueWords(line, result);
+                        _bytesRead += Encoding.GetByteCount(line);
+                        if (cancelationToken.IsCancellationRequested)
+                        {
+                            return result;
+                        }
+
+                    } while (!reader.EndOfStream);
+
+                    return result;
+                }
+                finally
                 {
                     _bytesRead = 0;
-                    var line = String.Empty;
-
-                    try
-                    {
-                        do
-                        {
-                            line = reader.ReadLine();
-                            MapUniqueWords(line, result);
-                            _bytesRead += Encoding.GetByteCount(line);
-                            if (cancelationToken.IsCancellationRequested)
-                            {
-                                return null;
-                            }
-
-                        } while (!reader.EndOfStream);
-
-                        return result;
-                    }
-                    finally
-                    {
-                        _bytesRead = 0;
-                        _timer?.Stop();
-                    }
+                    _timer?.Stop();
                 }
             });
 

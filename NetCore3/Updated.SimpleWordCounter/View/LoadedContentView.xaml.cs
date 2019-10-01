@@ -20,9 +20,6 @@ namespace SimpleWordCounter.View
     /// </summary>
     public partial class LoadedContentView : UserControl
     {
-        public LoadedContentView()
-        {
-            InitializeComponent();
-        }
+        public LoadedContentView() => InitializeComponent();
     }
 }
